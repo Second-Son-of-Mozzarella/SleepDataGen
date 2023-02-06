@@ -36,10 +36,10 @@ if (resp == "1")
         {
             // generate random number of hours slept between 4-12 (inclusive)
             hours[i] = rnd.Next(4, 13);
-            sw.WriteLine($"{dataDate:M/d/yyyy},{string.Join("|", hours)}");
+            //sw.WriteLine($"{dataDate:M/d/yyyy},{string.Join("|", hours)}");
         }
         // M/d/yyyy,#|#|#|#|#|#|#
-        Console.WriteLine($"{dataDate:M/d/yy},{string.Join("|", hours)}");
+        sw.WriteLine($"{dataDate:M/d/yy}|{string.Join("|", hours)}");
         // add 1 week to date
         dataDate = dataDate.AddDays(7);
         
@@ -54,14 +54,26 @@ else if (resp == "2")
          while (!sr.EndOfStream){
               string line = sr.ReadLine();
                  // convert string to array
-             string[] date = line.Split(',');
+             string[] data = line.Split('|');
+             
+
                 // display array data
-               // for(int i = 0; i > hours.Length; i++){
+               
+             
+                DateTime weekHeader = DateTime.Parse(data[0]);
+                float tot = Int32.Parse(data[1]) + Int32.Parse(data[2]) + Int32.Parse(data[3]) + Int32.Parse(data[4]) + Int32.Parse(data[5]) + Int32.Parse(data[6]) + Int32.Parse(data[7]);
+                float avg = (Int32.Parse(data[1]) + Int32.Parse(data[2]) + Int32.Parse(data[3]) + Int32.Parse(data[4]) + Int32.Parse(data[5]) + Int32.Parse(data[6]) + Int32.Parse(data[7])) / 7;
+                
+                
+                
 
-                DateTime weekHeader = DateTime.Parse(date[0]);
-
-                    Console.WriteLine($"Week of {weekHeader:MMMM}, {weekHeader:dd}, {weekHeader:yyyy}");
-               // }
+                Console.WriteLine($"Week of {weekHeader:MMMM}, {weekHeader:dd}, {weekHeader:yyyy}");
+                Console.WriteLine(" {0,2} {1,2} {2,2} {3,2} {4,2} {5,2} {6,2} {7,3} {8,3}","Mo","Tu","We","Th","Fr","Sa","Su","Tot","Avg");
+                Console.WriteLine(" {0,2:C2} {0,2:C2} {0,2:C2} {0,2:C2} {0,2:C2} {0,2:C2} {0,2:C2} {1,3:C2} {1,3:C2}","--","---");
+                Console.WriteLine(" {0,2:C3} {1,2:C3} {2,2:C3} {3,2:C3} {4,2:C3} {5,2:C3} {6,2:C3} {7,3} {8,3}", data[1], data[2], data[3], data[4], data[5], data[6], data[7], tot, avg);
+                Console.WriteLine(" ");
+                
+               
                 
                     } 
              
