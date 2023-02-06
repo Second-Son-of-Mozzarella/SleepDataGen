@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+string file = "data.txt";
 Console.WriteLine("Hello, World!");
 // ask for input
 Console.WriteLine("Enter 1 to create data file.");
@@ -47,6 +48,24 @@ if (resp == "1")
 }
 else if (resp == "2")
 {
-    // TODO: parse data file
+    
+            
+     StreamReader sr = new StreamReader(file);
+         while (!sr.EndOfStream){
+              string line = sr.ReadLine();
+                 // convert string to array
+             string[] date = line.Split(',');
+                // display array data
+               // for(int i = 0; i > hours.Length; i++){
+
+                DateTime weekHeader = DateTime.Parse(date[0]);
+
+                    Console.WriteLine($"Week of {weekHeader:MMMM}, {weekHeader:dd}, {weekHeader:yyyy}");
+               // }
+                
+                    } 
+             
+            
+         sr.Close();
 
 }
